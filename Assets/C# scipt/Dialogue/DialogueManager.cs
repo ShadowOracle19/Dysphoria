@@ -13,10 +13,14 @@ public class DialogueManager : MonoBehaviour
 
     public GameObject textPanel;
 
+    float maxTimer = 1.5f;
+    float timer = 0;
+
     // Start is called before the first frame update
     void Start()
     {
         sentences = new Queue<string>();
+        timer = maxTimer;
     }
 
     public void StartDialogue(Dialogue dialogue)
@@ -35,7 +39,7 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
-            EndDialogue();
+            //EndDialogue();
             return;
         }
 
@@ -55,13 +59,14 @@ public class DialogueManager : MonoBehaviour
             femaleInner.pitch = Random.Range(1f, 1.5f);
             yield return new WaitForSeconds(0.1f);
         }
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(1.5f);
         EndDialogue();
         yield return null;
     }
 
     void EndDialogue()
     {
+
         textPanel.SetActive(false);
     }
 }
