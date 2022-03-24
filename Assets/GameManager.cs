@@ -6,7 +6,7 @@ using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
-    [SerializeField] public  float dysphoriaLevel = 0;
+    [SerializeField] public float dysphoriaLevel = 0;
     float dysphoriaMax = 1;
 
     public Material[] colors;
@@ -19,7 +19,7 @@ public class GameManager : MonoBehaviour
     private Task[] taskList;
     public List<Task> tasks;
     public Transform panel;
-   
+
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +53,12 @@ public class GameManager : MonoBehaviour
         //}
         lerpedColor = Color.Lerp(colors[0].color, colors[1].color, dysphoriaLevel);
         player.color = lerpedColor;
+
+        if (tasks.Count == 0)
+        {
+            Debug.Log("Tasks done");
+        }
     }
 
-    
+
 }

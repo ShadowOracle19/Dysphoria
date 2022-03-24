@@ -2,6 +2,9 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
+using UnityEngine.Rendering.Universal;
+using UnityEngine.Rendering;
+using UnityEngine.SceneManagement;
 
 enum EnemyStates
 {
@@ -26,6 +29,9 @@ public class EnemyNavigation : MonoBehaviour
     public DialogueTrigger wander_Dialogue;
     bool chaseDialogueIsPlaying = false;
     bool wanderDialogueIsPlaying = false;
+
+    [Header("Effects")]
+    public Volume volume;
 
     [SerializeField]
     EnemyStates m_currentState = EnemyStates.Wander;
@@ -80,14 +86,9 @@ public class EnemyNavigation : MonoBehaviour
        {
             if(hitCollide.gameObject.tag == "Player")
             {
-                Debug.Log("Detect player");
                 m_currentState = EnemyStates.Chase;
-            }
-            
+            }           
        }
-
-
-        
     }
 
     private void FixedUpdate()
@@ -106,6 +107,10 @@ public class EnemyNavigation : MonoBehaviour
 
                 }
             }
+            else if(dist <= 2)
+            {
+                SceneManager.LoadScene("Real World");
+            }
             else
             {
                 timer = maxTimer;
@@ -116,6 +121,9 @@ public class EnemyNavigation : MonoBehaviour
 
     void Wander()
     {
+        Vignette tmp;
+        volume.profile.TryGet<Vignette>(out tmp);
+        tmp.intensity.Override(0.3f);
         if (!agent.pathPending && agent.remainingDistance < 0.5f)
             GotoNextPoint();
 
@@ -129,6 +137,9 @@ public class EnemyNavigation : MonoBehaviour
 
     void ChasePlayer()
     {
+        Vignette tmp;
+        volume.profile.TryGet<Vignette>(out tmp);
+        tmp.intensity.Override(0.5f);
         agent.destination = player.position;
 
         if (!chaseDialogueIsPlaying)

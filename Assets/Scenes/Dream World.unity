@@ -49815,7 +49815,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!114 &1156144473
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -72919,6 +72919,7 @@ MonoBehaviour:
   timer: 0
   chase_Dialogue: {fileID: 916823661}
   wander_Dialogue: {fileID: 958654062}
+  volume: {fileID: 1156144473}
   m_currentState: 0
 --- !u!136 &1683957436
 CapsuleCollider:
