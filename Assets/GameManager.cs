@@ -20,6 +20,10 @@ public class GameManager : MonoBehaviour
     public List<Task> tasks;
     public Transform panel;
 
+    //phone 
+    public GameObject phone;
+    bool callPhone = false;
+
 
     // Start is called before the first frame update
     void Start()
@@ -56,7 +60,10 @@ public class GameManager : MonoBehaviour
 
         if (tasks.Count == 0)
         {
-            Debug.Log("Tasks done");
+            if (callPhone) return;
+            
+            phone.SendMessage("PhoneCall");
+            callPhone = true;
         }
     }
 

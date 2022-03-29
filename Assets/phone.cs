@@ -16,4 +16,9 @@ public class phone : MonoBehaviour
     {
         
     }
+
+    public void PhoneCall()
+    {
+        Debug.Log("Phone is ringing");
+    }
 }

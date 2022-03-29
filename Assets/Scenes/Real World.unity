@@ -584,6 +584,7 @@ MonoBehaviour:
   player: {fileID: 2100000, guid: d89cbfd1191c2674e89e6dfc4cb8e4af, type: 2}
   tasks: []
   panel: {fileID: 1650992713}
+  phone: {fileID: 1901194797}
 --- !u!4 &431495387
 Transform:
   m_ObjectHideFlags: 0
@@ -2361,7 +2362,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1901194797}
   m_LocalRotation: {x: -0, y: 0.3863431, z: -0, w: 0.9223552}
-  m_LocalPosition: {x: -28.541, y: 0.841, z: 14.3411}
+  m_LocalPosition: {x: -28.541, y: 1.099, z: 4.527}
   m_LocalScale: {x: 0.147, y: 0.0316912, z: 0.3037}
   m_Children:
   - {fileID: 797246785}
