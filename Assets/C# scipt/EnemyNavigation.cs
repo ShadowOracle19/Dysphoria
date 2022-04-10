@@ -17,12 +17,14 @@ public class EnemyNavigation : MonoBehaviour
     public Transform[] points;
     public Transform player;
     public float detectionRange = 10;
+    public DreamGameManager gameManager;
     private int destPoint = 0;
     private NavMeshAgent agent;
 
     public bool playerDetect;
     public float maxTimer = 5.0f;
     public float timer = 0.0f;
+    public bool activate = false;
 
     [Header("Dialogue")]
     public DialogueTrigger chase_Dialogue;
@@ -65,6 +67,8 @@ public class EnemyNavigation : MonoBehaviour
 
     void Update()
     {
+        agent.enabled = activate;
+        if (!activate) return;
         switch (m_currentState)//enemy state machine
         {
             case EnemyStates.Wander:
@@ -107,9 +111,10 @@ public class EnemyNavigation : MonoBehaviour
 
                 }
             }
-            else if(dist <= 2)
+            else if(dist <= 2)//Dysphoria catches player
             {
-                SceneManager.LoadScene("Real World");
+                gameManager.Dysphoria();
+                SceneManager.LoadScene("IntroCutscene");
             }
             else
             {

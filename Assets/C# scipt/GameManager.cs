@@ -10,7 +10,6 @@ public class GameManager : MonoBehaviour
     float dysphoriaMax = 1;
 
     public Material[] colors;
-    public DialogueTrigger beginning;
 
     Color lerpedColor;
     public Material player;

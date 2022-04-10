@@ -22,21 +22,6 @@ public class SC_FPSController : MonoBehaviour
     Vector3 moveDirection = Vector3.zero;
     float rotationX = 0;
 
-    public bool coverFace = false;
-    
-    //UI
-    public GameObject panel;
-    public GameObject taskPopUp;
-    public TextMeshProUGUI taskText;
-    public Image timerSprite;
-
-    //Task Timer stuff
-    public float timer = 0;
-    public float maxTimer = 1;
-    public float timerTik = 0.1f;
-    public bool mouseHeldDown = false;
-    public bool lookingAtTask = false;
-
     [HideInInspector]
     public bool canMove = true;
 
@@ -51,39 +36,9 @@ public class SC_FPSController : MonoBehaviour
 
     void Update()
     {
-        Movement();
-        timerSprite.fillAmount = timer;
-        
-
-        if(Input.GetMouseButtonDown(0))
-        {
-            mouseHeldDown = true;            
-        }
-        if(Input.GetMouseButtonUp(0))
-        {
-            mouseHeldDown = false;
-        }
-
-        if (Input.GetMouseButtonDown(1))
-        {
-            print("hide face");
-            panel.SetActive(true);
-            coverFace = true;
-        }
-
-        if(Input.GetMouseButtonUp(1))
-        {
-            print("Uncover");
-            panel.SetActive(false);
-            coverFace = false;
-        }
-
+        Movement();        
     }
 
-    private void FixedUpdate()
-    {
-        LookAt();
-    }
 
     private void Movement()
     {
@@ -127,57 +82,15 @@ public class SC_FPSController : MonoBehaviour
         }
     }
 
-    private void LookAt()
-    {
-        RaycastHit hit;
-        Vector3 p1 = transform.position + characterController.center + Vector3.up * -characterController.height * 0.5f;
-        Vector3 p2 = p1 + Vector3.up * characterController.height;
-
-        if (Physics.CapsuleCast(p1, p2, characterController.radius, transform.forward, out hit, 10))
-        {
-            if (hit.transform.gameObject.CompareTag("Mirror"))
-            {
-                if (coverFace)
-                    return;
-                gameManager.dysphoriaLevel += 0.01f;
-            }
-            else if (hit.transform.gameObject.CompareTag("TaskObject"))
-            {
-                taskPopUp.SetActive(true);
-                taskText.text = hit.transform.gameObject.GetComponent<Task>().taskName;
-                lookingAtTask = true;
-
-                if (mouseHeldDown && lookingAtTask)
-                {
-                    timer += timerTik * Time.deltaTime;
-                    if (timer >= maxTimer)
-                    {
-                        //task done code right here 
-                        hit.transform.gameObject.GetComponent<Task>().taskFinished = true; ;
-                        print("Task done");
-                    }
-                }
-                else
-                {
-                    timer = 0;
-                }
-            }
-            else
-            {
-                taskPopUp.SetActive(false);
-                lookingAtTask = false;
-            }
-        }
-        else
-        {
-
-            if (!(gameManager.dysphoriaLevel <= 0))
-            {
-                gameManager.dysphoriaLevel -= 0.01f;
-                return;
-            }
-
-
-        }
-    }
+    //public override void Teleport(Transform fromPortal, Transform toPortal, Vector3 pos, Quaternion rot)
+    //{
+    //    transform.position = pos;
+    //    Vector3 eulerRot = rot.eulerAngles;
+    //    float delta = Mathf.DeltaAngle(smoothYaw, eulerRot.y);
+    //    yaw += delta;
+    //    smoothYaw += delta;
+    //    transform.eulerAngles = Vector3.up * smoothYaw;
+    //    velocity = toPortal.TransformVector(fromPortal.InverseTransformVector(velocity));
+    //    Physics.SyncTransforms();
+    //}
 }

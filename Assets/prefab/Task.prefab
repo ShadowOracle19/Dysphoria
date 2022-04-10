@@ -62,7 +62,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 994ea9dc578e83040939f0596b3c2b9d, type: 2}
+  - {fileID: 2100000, guid: 1691ddd47830fb646abae53e0a7826af, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -114,6 +114,7 @@ MonoBehaviour:
   taskFinished: 0
   taskText: 0
   textPrefab: {fileID: 856370483959938330, guid: 4a887ab56345c844b833ffb8c5cba0c6, type: 3}
+  _text: {fileID: 0}
 --- !u!114 &1738622643
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -129,5 +130,6 @@ MonoBehaviour:
   dialogue:
     name: 
     textColor: {r: 1, g: 0.7137255, b: 0.88235295, a: 1}
+    voice: {fileID: 0}
     senstences:
     - All done the laundry

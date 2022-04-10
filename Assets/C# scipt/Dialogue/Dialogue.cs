@@ -9,6 +9,8 @@ public class Dialogue
 
     public Color textColor;
 
+    public AudioClip voice;
+
     [TextArea(3, 10)]
     public string[] senstences;
     

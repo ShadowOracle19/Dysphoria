@@ -6,6 +6,7 @@ using TMPro;
 public class DialogueManager : MonoBehaviour
 {
     public TextMeshProUGUI dialogueText;
+    public TextMeshProUGUI nameText;
 
     private Queue<string> sentences;
 
@@ -25,6 +26,7 @@ public class DialogueManager : MonoBehaviour
 
     public void StartDialogue(Dialogue dialogue)
     {
+        
         sentences.Clear();
         textPanel.SetActive(true);
         foreach (string sentence in dialogue.senstences)
@@ -32,6 +34,9 @@ public class DialogueManager : MonoBehaviour
             sentences.Enqueue(sentence);
         }
         dialogueText.color = dialogue.textColor;
+        nameText.text = dialogue.name;
+        nameText.color = dialogue.textColor;
+        femaleInner.clip = dialogue.voice;
         DisplayNextSentence();
     }
 
@@ -39,7 +44,7 @@ public class DialogueManager : MonoBehaviour
     {
         if(sentences.Count == 0)
         {
-            //EndDialogue();
+            EndDialogue();
             return;
         }
 
@@ -60,7 +65,8 @@ public class DialogueManager : MonoBehaviour
             yield return new WaitForSeconds(0.1f);
         }
         yield return new WaitForSeconds(1.5f);
-        EndDialogue();
+        //EndDialogue();
+        DisplayNextSentence();
         yield return null;
     }
 

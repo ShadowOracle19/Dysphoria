@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
 
-public class Task : MonoBehaviour
+public class Task : MonoBehaviour, IInteractable
 {
     public string taskName;
     public float taskLength;
@@ -11,6 +11,16 @@ public class Task : MonoBehaviour
     public bool taskText = false;
     public TextMeshProUGUI textPrefab, _text;
     GameManager gameManager;
+
+    public string GetDescription()
+    {
+        return taskName;
+    }
+
+    public void Interact()
+    {
+        taskFinished = true;
+    }
 
     private void Start()
     {
@@ -27,7 +37,6 @@ public class Task : MonoBehaviour
 
         if(taskFinished)
         {         
-            gameObject.GetComponent<MeshRenderer>().material.color = Color.green;
             taskText = true;
             if(taskText)
             {
@@ -37,10 +46,6 @@ public class Task : MonoBehaviour
                 Destroy(gameObject);
             }
                        
-        }
-        else
-        {
-            gameObject.GetComponent<MeshRenderer>().material.color = Color.red;
         }
     }
 }
